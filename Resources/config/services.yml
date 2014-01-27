@@ -1,0 +1,11 @@
+services:
+    est_idcard.reader:
+        class: TFox\EstIdcardBundle\Service\CertificateReaderService
+
+    est_id_card.security.authentication.provider:
+        class:  TFox\EstIdcardBundle\Security\Authentication\Provider\EstIdcardAuthenticationProvider
+        arguments: ["", "%kernel.cache_dir%/security/nonces"]
+
+    est_id_card.security.authentication.listener:
+        class:  TFox\EstIdcardBundle\Security\Firewall\EstIdcardListener
+        arguments: ["@security.context", "@security.authentication.manager", "@est_idcard.reader"]
