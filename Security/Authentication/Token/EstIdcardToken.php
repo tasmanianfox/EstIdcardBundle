@@ -19,7 +19,7 @@ class EstIdcardToken extends AbstractToken
 	}
 	
 	public function setClientData(ClientData $clientData)
-	{		
+	{
 		$this->clientData = $clientData;
 	}
 	

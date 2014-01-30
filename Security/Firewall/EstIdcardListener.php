@@ -10,6 +10,8 @@ use TFox\EstIdcardBundle\Security\Authentication\Token\EstIdcardToken;
 use Symfony\Component\HttpFoundation\Response;
 use TFox\EstIdcardBundle\Exception\ClientCertificateReadingException;
 use TFox\EstIdcardBundle\Service\CertificateReaderService;
+use Symfony\Component\Security\Core\Exception\AuthenticationException;
+use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
 
 class EstIdcardListener implements ListenerInterface 
 {
@@ -42,27 +44,41 @@ class EstIdcardListener implements ListenerInterface
     public function handle(GetResponseEvent $event)
     {
         $request = $event->getRequest();
+        $serverAttributes = $request->server->all();
         $token = new EstIdcardToken();
-
-        try {
-        	$serverAttributes = $request->server->all();
-
+        $response = null;
+//         try {
         	/**
-			 * @var $clientData \TFox\EstIdcardBundle\Entity\ClientData
+        	 * @var $clientData \TFox\EstIdcardBundle\Entity\ClientData
         	 */
         	$clientData = $this->certificateReader->readCertificate($request);
         	$token->setClientData($clientData);
+
+        	try {
+        		$authToken = $this->authenticationManager->authenticate($token);
+        		$this->securityContext->setToken($authToken);
+
+        		return;
+        	} catch(AuthenticationException $e) {
+        		throw new AccessDeniedHttpException();
+        	}
+
+
+//         } catch(\Exception $e) {
+//         	$response = new Response();
+//         	$response->setStatusCode(Response::HTTP_FORBIDDEN);
+//         	$event->setResponse($response);
+//         	return;
         	
-            $authToken = $this->authenticationManager->authenticate($token);
-            $this->securityContext->setToken($authToken);
+//         	throw new AuthenticationException();
+//         }
+        /*
+        } catch(ClientCertificateReadingException $e) {
+        	//$this->securityContext->setToken($token);
+			//return;
+        } catch (AuthenticationException $failed) {}
+*/
 
-            return;
-        } catch (AuthenticationException $failed) {
-            $response = new Response();
-            $response->setStatusCode(Response::HTTP_FORBIDDEN);
-            $event->setResponse($response);
-
-        }
         $response = new Response();
         $response->setStatusCode(Response::HTTP_FORBIDDEN);
         $event->setResponse($response);
