@@ -32,7 +32,8 @@ class EstIdcardAuthenticationProvider implements AuthenticationProviderInterface
         if (!is_null($user)) {
             $authenticatedToken = new EstIdcardToken($user->getRoles());
             $authenticatedToken->setUser($user);
-
+            $authenticatedToken->setClientData($token->getClientData());
+            
             return $authenticatedToken;
         }
 

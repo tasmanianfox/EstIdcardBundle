@@ -26,7 +26,7 @@ class CertificateReaderService
 			throw new ClientCertificateReadingException();			
 		if(!key_exists('subject', $certificateData) || !key_exists('serialNumber', $certificateData['subject']))
 			throw new ClientCertificateReadingException();
-		
+
 		$clientData = new ClientData();
 		$clientData->setFirstName($certificateData['subject']['GN']);
 		$clientData->setLastName($certificateData['subject']['SN']);

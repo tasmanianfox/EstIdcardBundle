@@ -23,6 +23,11 @@ class EstIdcardToken extends AbstractToken
 		$this->clientData = $clientData;
 	}
 	
+	public function getClientData()
+	{
+		return $this->clientData;
+	}
+	
 	public function getCredentials() 
 	{
 		return '';

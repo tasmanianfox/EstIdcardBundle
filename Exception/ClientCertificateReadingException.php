@@ -1,5 +1,4 @@
 <?php
-
 namespace TFox\EstIdcardBundle\Exception;
 
 use Symfony\Component\Security\Core\Exception\AuthenticationException;

@@ -19,8 +19,11 @@ class EstIdcardFactory implements SecurityFactoryInterface
         ;
 
         $listenerId = 'security.authentication.listener.est_id_card.'.$id;
-        $listener = $container->setDefinition($listenerId, new DefinitionDecorator('est_id_card.security.authentication.listener'));
-
+        $listener = $container->setDefinition($listenerId, new DefinitionDecorator('est_id_card.security.authentication.listener'))
+        	->replaceArgument(5, $config['login'])
+        	->replaceArgument(6, $config['login_check'])
+        ;
+        
         return array($providerId, $listenerId, $defaultEntryPoint);
     }
 
@@ -34,7 +37,13 @@ class EstIdcardFactory implements SecurityFactoryInterface
         return 'est_id_card';
     }
 
-    public function addConfiguration(NodeDefinition $node)
-    {
-    }
+	
+	public function addConfiguration(NodeDefinition $node)
+	{
+		$node
+			->children()
+			->scalarNode('login')->defaultValue('_login')->end()
+			->scalarNode('login_check')->defaultValue('_login_check')
+			->end();
+	}
 }
