@@ -9,6 +9,7 @@ use Symfony\Component\Security\Core\Exception\AuthenticationException;
 use TFox\EstIdcardBundle\Security\Authentication\Token\EstIdcardToken;
 use TFox\EstIdcardBundle\Exception\ClientCertificateReadingException;
 use Symfony\Component\Security\Core\Exception\UsernameNotFoundException;
+use TFox\EstIdcardBundle\Security\User\EstIdcardUserProviderInterface;
 
 class EstIdcardAuthenticationProvider implements AuthenticationProviderInterface 
 {
@@ -24,16 +25,13 @@ class EstIdcardAuthenticationProvider implements AuthenticationProviderInterface
     /* @var $token \TFox\EstIdcardBundle\Security\Authentication\Token\EstIdcardToken */
     public function authenticate(TokenInterface $token)
     {
-    	$user = null;
-		try {
-			$user = $this->userProvider->loadUserByUsername($token->getPersonalCode());
-		} catch(UsernameNotFoundException $e) {}
-		
+		$user = $this->userProvider->loadUserByUsername($token->getPersonalCode());
+
         if (!is_null($user)) {
             $authenticatedToken = new EstIdcardToken($user->getRoles());
             $authenticatedToken->setUser($user);
             $authenticatedToken->setClientData($token->getClientData());
-            
+
             return $authenticatedToken;
         }
 

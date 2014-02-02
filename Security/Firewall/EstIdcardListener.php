@@ -64,6 +64,12 @@ class EstIdcardListener implements ListenerInterface
      * @var string
      */
     const SESSION_AUTH_EXCEPTION = 'est_idcard.auth.exception';
+    
+    /**
+     * A session key for variable which saves user's data
+     * @var string
+     */
+    const SESSION_USER_DATA = 'est_idcard.user_data';
 
     public function __construct(SecurityContextInterface $securityContext, 
     		Router $router,
@@ -101,6 +107,7 @@ class EstIdcardListener implements ListenerInterface
    				$clientData = $this->certificateReader->readCertificate($request);
    				$token = new EstIdcardToken();
    				$token->setClientData($clientData);
+   				$this->session->set(self::SESSION_USER_DATA, $token->getClientData());
 
    				//Authenticate
    				$authToken = $this->authenticationManager->authenticate($token);

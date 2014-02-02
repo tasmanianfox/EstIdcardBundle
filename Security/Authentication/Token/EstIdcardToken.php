@@ -18,7 +18,7 @@ class EstIdcardToken extends AbstractToken
 		$this->setAuthenticated(count($roles) > 0);
 	}
 	
-	public function setClientData(ClientData $clientData)
+	public function setClientData($clientData)
 	{
 		$this->clientData = $clientData;
 	}
