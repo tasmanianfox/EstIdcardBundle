@@ -29,7 +29,7 @@ class EstIdcardUserProvider implements EstIdcardUserProviderInterface
 	
 	public function loadUserByUsername($username)
 	{
-		$clientData = $this->session->get(EstIdcardListener::SESSION_CLIENT_DATA);
+		$clientData = $this->session->get(EstIdcardListener::SESSION_USER_DATA);
 		return new EstIdcardUser($clientData);
 	}
 	
@@ -50,5 +50,6 @@ class EstIdcardUserProvider implements EstIdcardUserProviderInterface
 	{
 		if($this->supportsClass(get_class($user)))
 			return $this->loadUserByUsername($user->getPersonalCode());
+		return null;
 	}
 }

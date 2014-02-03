@@ -112,7 +112,7 @@ class EstIdcardListener implements ListenerInterface
    				//Authenticate
    				$authToken = $this->authenticationManager->authenticate($token);
    				$this->securityContext->setToken($authToken);
-
+   				
    				//Redirect to 
    				$originalUri = $this->session->get(self::SESSION_REDIRECTED_FROM_URI);
    				$this->session->remove(self::SESSION_REDIRECTED_FROM_URI);
