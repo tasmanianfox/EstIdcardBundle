@@ -195,3 +195,36 @@ class DefaultController extends Controller
 	}
 }
 ~~~
+
+There are example twig files for controller above:
+
+~~~
+
+{# src/Acme/DemoBundle/Resources/views/Id/Default/index.html.twig #}
+
+Unsecured area
+
+~~~
+
+~~~
+
+{# src/Acme/DemoBundle/Resources/views/Id/Default/admin.html.twig #}
+
+Admin area
+
+~~~
+
+~~~
+
+{# src/Acme/DemoBundle/Resources/views/Id/Default/secure.html.twig #}
+
+{# If built-in user provider is in use, such methods as getFirstName, getLastName and getPersonalCode are available for User object #}
+{% if user.firstName is defined and user.lastName is defined %}
+	Welcome to secured area, {{ user.firstName }} {{ user.lastName }}! Your personal code is {{ user.personalCode }}
+{% else %}
+{# For custom providers all necessary properties should be defined manually #}
+	Welcome to secured area, {{ user.username }}!
+{% endif %}
+
+~~~
+
