@@ -6,7 +6,21 @@ Detailed description will be available soon
 
 Installation
 ===============
-Isn't available yet. When the Bundle will be completed, instructions for Composer will be added.
+Add a dependency to composer.json file:
+~~~
+"tfox/estidcard-bundle": "1.0.0"
+~~~
+
+Add to AppKernel.php:
+
+~~~
+$bundles = array(
+  ...
+  new TFox\EstIdcardBundle\TFoxEstIdcardBundle(),
+  ...
+);
+~~~
+
 
 Configuration
 ===============
