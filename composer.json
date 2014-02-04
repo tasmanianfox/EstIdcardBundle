@@ -1,0 +1,40 @@
+{
+	"name" : "tfox/estidcard-bundle",
+	"description" : "Provides an authentication mechanism via Estonian National ID Card for Symfony2 projects",
+	"type" : "symfony-bundle",
+	"authors" : [{
+			"name" : "Sergei Beljakov",
+			"email" : "sergei.beljakov@tfox.eu"
+		}
+	],
+	"keywords" : [
+		"Authentication",
+		"Estonia",
+		"ID Card"
+	],
+	"homepage" : "https://github.com/tasmanianfox/EstIdcardBundle",
+	"license" : [
+		"MIT"
+	],
+	"require" : {
+		"symfony/framework-bundle" : "~2.1"
+	},
+	"require-dev" : {
+		"symfony/security-bundle" : "*",
+		"symfony/yaml" : "*",
+		"symfony/class-loader" : "*",
+		"symfony/browser-kit" : "*",
+		"sensio/framework-extra-bundle" : "*"
+	},
+	"autoload" : {
+		"psr-0" : {
+			"TFox\\EstIdcardBundle" : ""
+		}
+	},
+	"target-dir" : "TFox/EstIdcardBundle",
+	"extra" : {
+		"branch-alias" : {
+			"dev-master" : "1.0-dev"
+		}
+	}
+}
