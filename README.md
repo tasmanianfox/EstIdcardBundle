@@ -180,7 +180,7 @@ class DefaultController extends Controller
 			throw $exception;
 			
 		//If no errors found, redirect to authentication action
-		return $this->redirect($this->generateUrl('tfox_test_id_default_logincheck'));
+		return $this->redirect($this->generateUrl('acme_demo_default_logincheck'));
 	}
 	
 	/**
@@ -191,7 +191,7 @@ class DefaultController extends Controller
 	 */
 	public function loginCheckAction(Request $request)
 	{
-		return $this->redirect($this->generateUrl('tfox_test_id_default_secure'));
+		return $this->redirect($this->generateUrl('acme_demo_default_secure'));
 	}
 	
 	/**
