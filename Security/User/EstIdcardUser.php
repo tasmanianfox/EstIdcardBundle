@@ -26,12 +26,18 @@ class EstIdcardUser implements EstIdcardUserInterface
 	 */
 	protected $roles;
 	
+	/**
+	 * @var ClientData 
+	 */
+	protected $certificateData;
+	
 	public function __construct(ClientData $clientData)
 	{
 		$this->firstName = $clientData->getFirstName();
 		$this->lastName = $clientData->getLastName();
 		$this->personalCode = $clientData->getPersonalCode();
 		$this->roles = array('ROLE_USER');
+		$this->certificateData = $clientData;
 	}
 	
 	public function eraseCredentials()
@@ -72,6 +78,11 @@ class EstIdcardUser implements EstIdcardUserInterface
 		if($ucfirst)
 			return ucfirst(strtolower($this->lastName));
 		return $this->lastName;
+	}
+	
+	public function getCertificateData()
+	{
+		return $this->certificateData;
 	}
 
 	
