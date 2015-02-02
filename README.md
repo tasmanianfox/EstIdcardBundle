@@ -8,7 +8,7 @@ Installation
 ===============
 Add a dependency to composer.json file:
 ~~~
-"tfox/estidcard-bundle": "1.0.0"
+"tfox/estidcard-bundle": "1.0.*@dev"
 ~~~
 
 Add to AppKernel.php:
